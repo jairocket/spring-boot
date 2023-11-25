@@ -1,14 +1,8 @@
 package com.educando.web.course.config;
 
-import com.educando.web.course.entities.Category;
-import com.educando.web.course.entities.Order;
-import com.educando.web.course.entities.Product;
-import com.educando.web.course.entities.User;
+import com.educando.web.course.entities.*;
 import com.educando.web.course.entities.enums.OrderStatus;
-import com.educando.web.course.repositories.CategoryRepository;
-import com.educando.web.course.repositories.OrderRepository;
-import com.educando.web.course.repositories.ProductRepository;
-import com.educando.web.course.repositories.UserRepository;
+import com.educando.web.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -52,11 +49,10 @@ public class TestConfig implements CommandLineRunner {
         Product p4 = new Product(null, "PC Gamer", "Excepteur sint occaecat cupidatat non proident", 1200.0, "");
         Product p5 = new Product(null, "Rails for Dummies", "Nemo enim ipsam voluptatem quia voluptas sit", 100.99, "");
 
-
-        userRepository.saveAll(Arrays.asList(u1, u2));
-        orderRepository.saveAll(Arrays.asList(o1, o2, o3));
-        categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
-        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 
         p1.getCategories().add(c2);
         p2.getCategories().add(c1);
@@ -65,6 +61,12 @@ public class TestConfig implements CommandLineRunner {
         p4.getCategories().add(c3);
         p5.getCategories().add(c2);
 
+
+        userRepository.saveAll(Arrays.asList(u1, u2));
+        orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+        categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
     }
 }
