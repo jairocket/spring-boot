@@ -16,6 +16,7 @@ public class CategoryResource {
 
     @Autowired
     private CategoryService service;
+
     @GetMapping
     public ResponseEntity<List<Category>> findAll() {
         List<Category> categories = service.findAll();

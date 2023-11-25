@@ -2,10 +2,12 @@ package com.educando.web.course.config;
 
 import com.educando.web.course.entities.Category;
 import com.educando.web.course.entities.Order;
+import com.educando.web.course.entities.Product;
 import com.educando.web.course.entities.User;
 import com.educando.web.course.entities.enums.OrderStatus;
 import com.educando.web.course.repositories.CategoryRepository;
 import com.educando.web.course.repositories.OrderRepository;
+import com.educando.web.course.repositories.ProductRepository;
 import com.educando.web.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -40,16 +45,17 @@ public class TestConfig implements CommandLineRunner {
         Category c1 = new Category(null, "Electronics");
         Category c2 = new Category(null, "Books");
         Category c3 = new Category(null, "Computers");
-//
-//        Product p1 new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur adipiscing elit", 90.5, "");
-//        Product p2 new Product(null, "Smart TV", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium", 2190.0, "");
-//        Product p3 new Product(null, "Macbook Pro", "Duis aute irure dolor in reprehenderit ",1250.0, "");
-//        Product p4 new Product(null, "PC Gamer", "Excepteur sint occaecat cupidatat non proident", 1200.0, "");
-//        Product p5 new Product(null, "Rails for Dummies", "Nemo enim ipsam voluptatem quia voluptas sit", 100.99, "");
+
+        Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur adipiscing elit", 90.5, "");
+        Product p2 = new Product(null, "Smart TV", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium", 2190.0, "");
+        Product p3 = new Product(null, "Macbook Pro", "Duis aute irure dolor in reprehenderit ",1250.0, "");
+        Product p4 = new Product(null, "PC Gamer", "Excepteur sint occaecat cupidatat non proident", 1200.0, "");
+        Product p5 = new Product(null, "Rails for Dummies", "Nemo enim ipsam voluptatem quia voluptas sit", 100.99, "");
 
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
     }
 }
