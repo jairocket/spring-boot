@@ -2,8 +2,11 @@ package com.educando.web.course.services;
 
 import com.educando.web.course.entities.User;
 import com.educando.web.course.repositories.UserRepository;
+import com.educando.web.course.services.exceptions.DatabaseException;
 import com.educando.web.course.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +31,11 @@ public class UserService {
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException exception) {
+           throw new DatabaseException(exception.getMessage());
+        }
     }
 
     public User update(Long id, User user){
